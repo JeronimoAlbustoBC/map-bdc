@@ -30,6 +30,10 @@ db.connect((err) => {
   console.log('Conectado a la base de datos');
 });
 
+app.get('/', (req, res) => {
+  res.send('Hello World')
+})
+
 // Middleware para verificar el token JWT
 // const authenticateJWT = (req, res, next) => {
 //   const token = req.header('Authorization');
@@ -84,10 +88,6 @@ db.connect((err) => {
 //     res.send('Diagrama creado');
 //   });
 // });
-
-app.get('/', (req, res) => {
-  res.send('Hello World')
-})
 
 // app.get('/api/diagrams', authenticateJWT, (req, res) => {
 //   const query = `SELECT * FROM diagrams WHERE created_by = ? OR EXISTS (SELECT 1 FROM users WHERE role = 'admin')`;
