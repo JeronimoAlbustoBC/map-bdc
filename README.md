@@ -1,7 +1,14 @@
 # map-bdc
 
 
-#### Vue, Vue - flow, Node.js, mysql
+#### Vue v3.5   
+#### Vue - Flow v1.42
+#### Node.js v20.11
+#### Express v5.1
+#### MySQL v5.6
+
+
+
 
 ```SQL
 CREATE TABLE users (
