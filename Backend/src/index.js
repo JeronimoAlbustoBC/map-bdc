@@ -30,9 +30,12 @@ db.connect((err) => {
   console.log('Conectado a la base de datos');
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello World')
-})
+// app.get('/', (req, res) => {
+//   res.json({
+//     "name":"santiago",
+//     "age":"20"
+//   })
+// })
 
 // Middleware para verificar el token JWT
 // const authenticateJWT = (req, res, next) => {
