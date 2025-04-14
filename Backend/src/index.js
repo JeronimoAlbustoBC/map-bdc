@@ -25,10 +25,28 @@ const db = mysql.createConnection({
   database: process.env.DB_NAME
 });
 
+
 db.connect((err) => {
   if (err) throw err;
   console.log('Conectado a la base de datos');
 });
+
+
+app.get('/', (req, res) => {
+  db.query(
+    'SELECT 1 + 1 AS resultado', (err, result) => {
+      if(err) {
+        return res.status(500).json({ conectado:false, Error: err.message })
+      }
+
+      res.json({ conectado: true, resultado: result[0].resultado })
+    }
+  )
+})
+
+
+
+
 
 // app.get('/', (req, res) => {
 //   res.json({
@@ -36,6 +54,9 @@ db.connect((err) => {
 //     "age":"20"
 //   })
 // })
+
+
+
 
 // Middleware para verificar el token JWT
 // const authenticateJWT = (req, res, next) => {
