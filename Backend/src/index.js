@@ -34,7 +34,7 @@ db.connect((err) => {
 
 app.get('/', (req, res) => {
   db.query(
-    'SELECT 1 + 1 AS resultado', (err, result) => {
+    'SELECT 1 + 3  AS resultado', (err, result) => {
       if(err) {
         return res.status(500).json({ conectado:false, Error: err.message })
       }
