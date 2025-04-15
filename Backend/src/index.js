@@ -46,6 +46,13 @@ app.get('/', (req, res) => {
 
 
 
+app.get('/about', (req, res) => {
+  res.json({
+    "message":"saludos perros",
+    "count":"2",
+    "order":"1"
+  })
+})
 
 
 // app.get('/', (req, res) => {
@@ -143,3 +150,4 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });
+
