@@ -45,7 +45,7 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
-
+  
 // moddleware para ver si es admin
 function requireAdmin(req, res, next) {
   if (req.user.role !== 'admin') {
