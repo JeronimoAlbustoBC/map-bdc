@@ -44,8 +44,6 @@ app.get('/', (req, res) => {
   )
 })
 
-
-
 app.get('/about', (req, res) => {
   res.json({
     "message":"saludos perros",
@@ -53,6 +51,30 @@ app.get('/about', (req, res) => {
     "order":"1"
   })
 })
+
+
+
+// Obtener datos
+app.get('/api/diagrams', (req, res) => {
+  db.query('SELECT * FROM diagrams', (err, result) => {
+    if (err) return res.status(500).send(err);
+    if (!result || result.length === 0 || !result[0].data) {
+      return res.status(404).json({ nodes: [], edges: [] });
+    }
+
+    try {
+      const [nodes, edges] = JSON.parse(result[0].data);
+      res.json({ nodes, edges });
+    } catch (e) {
+      console.error('Error al parsear los datos:', e.message);
+      res.status(500).json({ error: 'Error al leer los datos del diagrama' });
+    }
+  });
+});
+
+
+
+
 
 
 // app.get('/', (req, res) => {
