@@ -59,7 +59,6 @@ app.get('/api/diagrams', (req, res) => {
 });
 
 
-
 // Obtener un solo diagrama por id
 app.get('/api/diagrams/:id', (req, res) => {
   const diagramId = req.params.id;
@@ -81,11 +80,59 @@ app.get('/api/diagrams/:id', (req, res) => {
 });
 
 
+// Crear un diagrama
+app.post('/api/diagrams', (req, res) => {
+  const { title, content, user_id, nodes, edges } = req.body;
+
+  if (!title || !user_id) {
+    return res.status(400).json({ error: 'Faltan campos obligatorios' });
+  }
+
+  const data = JSON.stringify([nodes || [], edges || []]);
+
+  db.query(
+    'INSERT INTO diagrams (title, content, user_id, data) VALUES (?, ?, ?, ?)',
+    [title, content || '', user_id, data],
+    (err, result) => {
+      if (err) return res.status(500).send(err);
+      res.status(201).json({ message: 'Diagrama creado', diagramId: result.insertId });
+    }
+  );
+});
 
 
+// Actualizar un diagrama por id
+app.put('/api/diagrams/:id', (req, res) => {
+  const diagramId = req.params.id;
+  const { title, content, nodes, edges } = req.body;
+  const data = JSON.stringify([nodes || [], edges || []]);
+
+  db.query(
+    'UPDATE diagrams SET title = ?, content = ?, data = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
+    [title, content, data, diagramId],
+    (err, result) => {
+      if (err) return res.status(500).send(err);
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: 'Diagrama no encontrado' });
+      }
+      res.json({ message: 'Diagrama actualizado' });
+    }
+  );
+});
 
 
+// Eliminar un diagrama por id
+app.delete('/api/diagrams/:id', (req, res) => {
+  const diagramId = req.params.id;
 
+  db.query('DELETE FROM diagrams WHERE id = ?', [diagramId], (err, result) => {
+    if (err) return res.status(500).send(err);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Diagrama no encontrado' });
+    }
+    res.json({ message: 'Diagrama eliminado correctamente' });
+  });
+});
 
 
 
