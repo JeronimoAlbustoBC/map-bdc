@@ -113,7 +113,7 @@ app.post('/api/register', authenticateToken, requireAdmin, async (req, res) => {
 
 
 
-// ruta de inicio y prueva
+// Ruta de inicio y prueva
 app.get('/', (req, res) => {
   db.query(
     'SELECT 1 + 3  AS resultado', (err, result) => {
