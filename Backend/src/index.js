@@ -3,6 +3,7 @@ const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const morgan = require('morgan')
 const cors = require('cors');
 require('dotenv').config();
 const SECRET = 'papa'; //.env
@@ -15,6 +16,7 @@ const port = 5000;
 // Configurar CORS
 app.use(cors());
 app.use(bodyParser.json());
+app.use(morgan('combined'))
 
 
 // Conexión con la base de datos
