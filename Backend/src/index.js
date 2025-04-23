@@ -31,8 +31,8 @@ db.connect((err) => {
   console.log('Conectado a la base de datos');
 });
 
-// middleware token y usuario registrado
 
+// middleware token y usuario registrado
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
@@ -113,7 +113,7 @@ app.post('/api/register', authenticateToken, requireAdmin, async (req, res) => {
 
 
 
-
+// ruta de inicio y prueva
 app.get('/', (req, res) => {
   db.query(
     'SELECT 1 + 3  AS resultado', (err, result) => {
